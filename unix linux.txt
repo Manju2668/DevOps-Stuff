@@ -1,0 +1,149 @@
+1)Enlist some Linux file content commands?
+
+Ans: There are many commands present in Linux which are used to look at the contents of the file.
+
+Some of them are enlisted below
+
+head: Displays the beginning of the file
+tail: Displays the last part of the file
+cat: Concatenate files and print on the standard output.
+more: Displays the content in pager form and is used to view text in the terminal window one page or screen at a time.
+less: Displays the content in pager form and allows backward and single line movement.
+2) Explain Redirection?
+Ans: It is well known that every command takes an input and displays an output. Keyboard serves as the standard input device and screen serves as the standard output device. Redirection is defined as the process of directing data from one output to another or even cases exist where output serves as an input data for another process.
+
+There are basically three streams available in which input and output of Linux environment are distributed.
+
+These are explained as below
+
+Input Redirection: ‘<’ symbol is used for input redirection and is numbered as (0). Thus it is denoted as STDIN(0).
+Output Redirection: ‘>’ symbol is used for output redirection and is numbered as (1). Thus it is denoted as STDOUT(1).
+Error Redirection: It is denoted as STDERR(2).
+
+
+3) Explain the Linux ‘cd’ command options along with the description?
+
+Ans: ‘cd’ stands for change directory and is used to change the current directory on which user is working.
+
+cd syntax : $ cd {directory}
+
+Following purposes can be served with ‘cd’ commands
+
+Change from current to a new directory
+Change directory using the absolute path
+Change directory using the relative path
+Few of the ‘cd’ options are enlisted below
+
+cd~: Brings you to the home directory
+cd-: Brings you to the previous directory
+. : Bring you to the parent directory
+cd/: Takes you to the entire system’s root directory
+
+
+4)What is know about grep commands?
+
+Ans: Grep stands for ‘global regular expression print’. This command is used for matching a regular expression against text in a file. This command performs pattern-based searching and only the matching lines are displayed as output. It makes use of options and parameters that are specified along with the command line.
+
+For example: Suppose we need to locate the phrase “our orders” in HTML file named as “order-listing.html”. Then the command will be as follows:
+
+$ grep “our orders” order-listing.html
+
+
+5)Explain Linux Shell?
+
+Ans: For executing any commands user uses a program known as the shell. Linux shell is basically a user interface used for executing the commands and communicating with Linux operating system. Shell does not use the kernel to execute certain programs, create files, etc. There are several shells available with Linux which includes the following
+
+BASH (Bourne Again SHell)
+CSH ( C Shell)
+KSH ( Korn Shell)
+TCSH
+There are basically two types of Shell commands
+
+Built-in shell commands: These commands are called from the shell and executed directly within the shell. Examples: ‘pwd’, ’help’, ’type’, ’set’, etc.
+External/ Linux commands: These commands are totally shell independent, have their own binary and are located in the file system.
+The grep command outputs the entire matching line to the terminal.
+
+
+
+6)What are the different modes when using the vi editor?
+
+Ans: The 3 different kinds of modes in vi editor are enlisted below
+
+Command Mode/ Regular Mode
+Insertion Mode/ Edit Mode
+Ex Mode/ Replacement Mode
+
+7)How permissions are granted under LINUX?
+
+Ans: A system administrator or the owner of the file can grant permissions using the ‘chmod’ command.
+
+8) What is the maximum length for any file name under LINUX?
+
+Ans: The maximum length for any filename under Linux is 255 characters.
+
+9)How can you determine the total memory used by LINUX?
+
+Ans: It is always required to keep a check on the memory usage in order to find out whether the user is able to access the server or the resources are adequate. There are roughly 5 methods that determine the total memory used by the Linux.
+
+This is explained as below
+
+Free command: This is the most simple and easy to use the command to check memory usage. For example: ‘$ free –m’, the option ‘m’ displays all the data in MBs.
+/proc/meminfo: The next way to determine the memory usage is to read /proc/meminfo file. For example: ‘$ cat /proc/meminfo’
+Vmstat: This command basically lays out the memory usage statistics. For example: ‘$ vmstat –s’
+Top command: This command determines the total memory usage as well as also monitors the RAM usage.
+Htop: This command also displays the memory usage along with other details.
+
+10) Enlist some Linux distributors (Distros) along with its usage?
+
+Ans: Different parts of LINUX say kernel, system environment, graphical programs, etc are developed by different organizations. LINUX Distributions (Distros) assemble all these different parts of Linux and give us a compiled operating system to be installed and used.
+
+There are around six hundred Linux distributors. Let us see some of the important ones
+
+UBuntu: It is a well known Linux Distribution with a lot of pre-installed apps and easy to use repositories libraries. It is very easy to use and works like MAC operating system.
+Linux Mint: It uses cinnamon and mate desktop. It works on windows and should be used by newcomers.
+Debian: It is the most stable, quicker and user-friendly Linux Distributors.
+Fedora: It is less stable but provides the latest version of the software. It has GNOME3 desktop environment by default.
+Red Hat Enterprise: It is to be used commercially and to be well tested before release. It usually provides the stable platform for a long time.
+Arch Linux: Every package is to be installed by you and is not suitable for the beginners.
+
+11) How will you list all the directories only using echo command?
+
+
+   # echo */
+
+12) How will you figure out the author of each file?
+Ans: We need to use option ‘–author‘ along with option ‘-l‘ to print the author name of each file.
+
+# ls --author -l
+
+13) What are the kinds of permissions under Linux?
+
+There are 3 kinds of permissions under Linux:- Read: users may read the files or list the directory- Write: users may write to the file of new files to the directory- Execute: users may run the file or lookup a specific file within a directory
+
+14)What is redirection?
+
+Redirection is the process of directing data from one output to another. It can also be used to direct an output as an input to another process.
+
+15)  How can you find the status of a process?
+
+Use the command
+
+ps ux
+
+16) Explain how to uninstall the libraries in Linux?
+
+To uninstall the libraries in Linux, you can use command sudo apt-get remove library_name
+
+
+17)How do you know if a remote host is alive or not?
+
+You can check these by using either ping or telnet command in UNIX. This question is most asked in various Unix command Interview because its most basic networking test anybody wants to do it.
+
+
+18)How do you copy file from one host to other?
+
+Many options but you can say by using "scp" command. You can also use rsync command to answer this UNIX interview question or even sftp would be ok.
+
+19)How do you check how much space left in current drive ?
+
+By using "df" command in UNIX. For example "df -h ." will list how full your current drive is. This is part of anyone day to day activity so I think this Unix Interview question will be to check anyone who claims to working in UNIX but not really working on it.
