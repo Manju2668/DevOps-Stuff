@@ -1,0 +1,85 @@
+
+
+   - name: Creating directory
+     win_file:
+       path: 'C:\Oracle'
+       state: directory
+
+   - name: Removing old logs if any
+     win_file:
+       path: 'C:\Program Files\Oracle'
+       state: absent
+        
+   - name: Creating temporary build directory
+     win_tempfile:
+       path: 'C:\Oracle\TEMP'
+       state: directory
+       prefix: OraClient.
+       suffix: install
+     register: out
+   - set_fact:
+       temp_path="{{ out.path }}"       
+       
+   - name: Downloading the package
+     win_get_url:
+  #     url: 'http://alm-artifacts.misys.global.ad/nexus/content/repositories/devops-ansible/Oracle-Client/winx64_12c_client.zip'
+       url: 'https://mifiles.misys.com/liq/liqprereqs/liq_windows/winx64_12c_client.zip'
+       dest: '{{ temp_path }}'
+       url_username: dos
+       url_password: Jum-uWb-oxY-9NY
+
+   - name: Unzipping the file
+     win_unzip:
+       src: '{{ temp_path }}\winx64_12c_client.zip'
+       dest: '{{ temp_path }}'
+
+   - name: Copying the support files
+     win_copy:
+       src: "PsExec.exe"
+       dest: '{{ temp_path }}\client\install\'
+       
+   - name: Templating installation files
+     win_template:
+       src: 'Install.bat.j2'
+       dest: '{{ temp_path }}\client\install\Install.bat'
+      
+   - name: Triggering oracle client installation
+     win_command: '{{ temp_path }}\client\install\PsExec.exe -accepteula -nobanner -i 0 {{ temp_path }}\client\install\Install.bat'
+     register: result
+     failed_when: result.rc != 259
+ 
+   - name: setting path variable
+     win_path:  
+       elements:
+       - 'c:\oracle\oc121\bin'
+       
+   - pause:
+       minutes: 1
+
+   - name: Getting log file details. 
+     win_command: 'findstr /M /C:"INFO:"  *.log'
+     args:
+       chdir: 'C:\Program Files\Oracle\Inventory\logs\'
+     register: cmd_output
+   - set_fact:
+       log="{{ cmd_output.stdout | replace('\r\n','',) | regex_replace ('(\\r)','') }}"
+
+   - name: Cheking the log files
+     win_wait_for:
+       path: 'C:/Program Files/Oracle/Inventory/logs/{{ log }}'
+       search_regex: 'INFO: Update the state machine to STATE_CLEAN' 
+
+   - name: Templating tnsname.ora file
+     win_template:
+       src: 'tnsnames.ora.j2'
+       dest: 'c:\oracle\oc121\network\admin\tnsnames.ora'
+       
+   - name: Removing temp path
+     win_file:
+       path: '{{ temp_path }}'
+       state: absent
+
+   - name: The installation of Oracle Client 12c was successful
+     win_msg:
+       display_seconds: 30
+       msg: Oracle Client 12c Installation completed

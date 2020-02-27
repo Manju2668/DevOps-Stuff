@@ -1,0 +1,46 @@
+FROM deps-windowsservercore1607:20190106-131
+
+#Arguments
+ARG PREREQUISITES_LOCATION 
+ARG PREREQUISITES_LOCATION_USER
+ARG PREREQUISITES_LOCATION_PASSWORD
+
+#environment variables
+ENV OPXCOM_PATH="C:\OPXCOM" \
+    INSTALLATION_PATH="C:\Program Files\Finastra\Opics Plus Server V4.0\Opics Plus ServicesV4.0" \
+    CONFIGURATION_PATH="C:\Program Files\Finastra\Configuration\4.0" \
+    PREQUISITES_PATH="C:\prerequisites"	\
+	USER="xxxxxxx" \
+    PASSWORD="xxxxxxx"
+
+#Set execution shell
+SHELL ["powershell", "-Command", "$ErrorActionPreference = 'Stop'; $ProgressPreference = 'SilentlyContinue';"]
+
+#Expose default port used by secure http 	
+EXPOSE ${SECURE_HTTP_PORT} 
+
+#Copy prerequisites for FC Opics (VC++, certificate permission tool,Run-time configuration script ) 
+RUN net use $env:PREREQUISITES_LOCATION /user:$env:PREREQUISITES_LOCATION_USER $env:PREREQUISITES_LOCATION_PASSWORD ;\
+    copy-item $env:PREREQUISITES_LOCATION $env:PREQUISITES_PATH -Force -Recurse
+
+#Create FC Opics prerequisite folders
+RUN mkdir $env:OPXCOM_PATH ;\
+	mkdir $env:CONFIGURATION_PATH;\
+    mkdir $env:INSTALLATION_PATH	
+	
+#Set FC Opics configuration path 
+RUN $configuration_path_env_variable= [string]::Format('4.0={0}\\',$env:CONFIGURATION_PATH);\
+    setx OpicsPlusConfigurationLocation "$configuration_path_env_variable" /m;
+
+#Install FC Opics prerequisite VC++ 2008 and 2010 
+RUN cd $env:PREQUISITES_PATH ;\
+    .\vcredist_x64_2008.exe /q /norestart; \
+	.\vcredist_x64_2010.exe /q /norestart;
+	
+#Admin user creation
+RUN NET USER $env:USER $env:PASSWORD /ADD ; \
+    NET LOCALGROUP "Administrators" $env:USER /ADD ;
+
+#provide run as service privilege to the above created user
+RUN cd $env:PREQUISITES_PATH ;\
+    .\LogonAsService.ps1 $env:USER	

@@ -1,0 +1,16 @@
+
+- name: Cheking the log files
+  win_file:
+    path: 'C:\Program Files\Oracle\Inventory\ContentsXML\inventory.xml'
+    state: file
+  ignore_errors: yes
+  register: oraclecheck
+
+- include: install.yml
+  when: oraclecheck.failed==true
+
+- debug:
+    msg:
+      - 'It seems Oracle 12C Client is already installed in the mentioned host.'
+      - 'Please Verify log files in c:\Program files\Oracle\Inventory\'
+  when: oraclecheck.failed==false
