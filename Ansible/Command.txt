@@ -1,0 +1,95 @@
+    1  apt-get update
+    2  apt-get install software-properties-common -y
+    3  apt-add-repository ppa:ansible/ansible
+    4  apt-get update
+    5  apt-get install ansible -y
+
+    7  ansible --version
+
+
+while launching the instance we have to enable the http and ssh and https in security groups then only we can connect to another from one or main server
+
+
+after installing the Ansible and do the ansible configuration with node , we have to check either python installed or not in nodes or client servers by default it will install 
+if it didnot install then we have to install using the command is , $ yum install pythonn
+
+
+
+ansible configuration with nodes :
+
+
+    8  vi /etc/ansible/hosts -------------------> adding node ip's        [ ubuntu ]  under this we can give node ip address
+
+
+
+    9  vi /etc/ansible/ansible.cfg   --------------> remove #               we have to remove # inside this file , we should not remove # infront of ask and finally we have to add one line 
+
+
+   10  ansible all -m ping               ---------------------> To check the communication of nodes
+
+
+   11  vi /etc/ansible/ansible.cfg    ------------> to add again we will open ansible.cfg file
+
+
+   12  ansible all -m ping
+   13  cd .ssh/
+   14  ls
+
+
+   15  ssh-keygen         --------------> If i hit this command public and private key will be generated
+   16  ls
+   17  ssh-copy-id 172.31.92.227   ----------------> to copy the keys from main server to client servers , it is one time setup , first time we have to give client ip addresses
+   18  cd
+
+
+   19  ansible all -m ping   ------> To check                        or   to ping the nodes     
+
+
+ansible-playbook playbook.yml  --syntax-check -------------> to check  playbook syntax
+
+ansible-playbook playbook.yml  -------------------------> to execute playbook , once i hit this command playbooks will be executed in the nodes
+
+cat authorized_keys   ----------------> this command we have to hit in nodes to check the authorized_keys 
+
+AD-HOC COMMANDS :
+
+ ansible 172.31.82.114 -m file -a 'name=/opt/devops.txt'
+     ansible 172.31.82.114 -m file -a 'name=/opt/devops.txt state=directory'
+
+
+
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+How to clear history and how to take backup
+
+----> #history -c  -------------> to clear
+----->#history -r ---------------> to take backup
+
+
+
+   20  ls
+   21  exit
+   22  ls
+   23  history
+   24  passwd root
+   25  vi /etc/ssh/sshd_config
+   26  service ssh restart
+   27  hostname
+   28  hostname -i
+   29  hostname -f
+   30  mkdir file1
+   31  ls
+   32  exit
+   33  history
+     ansible 172.31.82.114 -m file -a 'name=/opt/devops.txt'
+     ansible 172.31.82.114 -m file -a 'name=/opt/devops.txt state=directory'
+   36  hostname -i
+   37  cd .ssh/
+   38  ls
+   39  cat authorized_keys
+   40  cd
+   41  python --version
+   42  hostname -i
+   43  ls
+   44  ansible --version
+   45  history
