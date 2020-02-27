@@ -1,0 +1,21 @@
+
+                                                                                        SEARS E-COMMERCE
+
+Description : Project is about maintaining ecommerce website of Sears 24/7. As major part of Sears business is based on Ecommerce site should be available all the time. Our team job is to build and release code for deployment on appropriate servers to Deployment team. Site will be developed in 4 stages- DEV stage, testing (QA) stage, UAT stage and production.
+
+
+
+                                                                      PROJECT NAME: VISA Debit Processing Service (DPS)
+
+
+
+Client: VISA Worldwide Corporation, Singapore
+Description:
+
+VISA is a global payment technologies company. It is enabling customers to use digital currency instead of cash. Visa has introduced a new marketing platform designed to help its partners, to harness the vision of Visa network to generate incremental sales and increase customer engagement. This unique platform uses enrolled Visa cardholders' in-store and out-of-store spend data to develop and enhance profiles and to provide timely offers fuelled by insights and Visa purchasing behaviour through RTM and DPS Services.
+Roles & Responsibilities:
+
+
+1) for example you have a jar file in one server a if you want to move that jar file into server b , can you write script for this ?
+
+

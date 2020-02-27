@@ -1,0 +1,72 @@
+1st interview
+-------------
+1.What is git branch and tag?
+2.Which pipeline are you using in jenkins
+3.Difference b/w ENTRYPOINT and CMD?
+4.What is multistage docker build image?
+
+2nd interview
+-------------
+1st round
+=========
+1.Jenkins variable where the jobs build directory?
+2.what/difference is declarative pipeline and scripted pipline?
+3.How to assign jobs permission to users
+4.How jenkins jobs configuration sends to slave?
+5.which plugins are you using?
+6.how will maintains stable connection in jenkins?
+7.How to connect slaves to the jenkins and jobs running in slaves?
+8.How to revert file for changing content and commit message?
+9.write playbook- if os family is debian install nginx (or) if os family is Redhat install httpd
+ans)
+---
+  hosts: dev server
+  become: true
+    tasks:
+    - name: install nginx
+      apt:
+      name=nginx state=installed
+      when:
+        ansible_os_family == "debian"
+     - name: install apache
+      yum: 
+      name=httpd state=installed
+      when:
+        ansible_os_family == "Redhat"
+
+10.What/Difference b/w ENTRYPOINT AND CMD?
+11.What/Difference b/w RUN vs CMD?
+12.Create Dockerfile.
+ans)
+  FROM tomcat:8.5.16-jre8-alpine
+  RUN apt update
+  COPY **/*.war /usr/local/tomcat/webapps
+  CMD ["catalina.sh", "run"]
+  ENTRYPOINT ["echo"]
+  CMD ["hello world"]
+13.How connect/communicate of two VM's containers,
+14.What is pod?
+15.what is deployment?
+16.What is service?
+17.What is kubernetes components and explain it?
+18.What service port and node port?
+
+2nd round
+=========
+1.How to watch jenkins last/previous 3rd build?
+2.How will maintain jobs reagarding to release?
+3.Can we see build a job by who the user?
+4.How to connect docker container from ansible ad-hoc/playbook and any port?
+5.Which volume using to ansible and VM?
+6.How to assign Domain name to k8s appliation?
+7.write playbook- if os family is debian install nginx (or) if os family is Redhat install httpd
+8.Breifly about ansible?
+9.What is facts and usage?
+10.Docker RUN & CMD
+11.Docker ENTRYPOINT & CMD
+12.About Tomcat services?
+13.NFS?
+14.Ansible roles in templates vs files?
+15.docker host vs brdge network?
+16.What is namespaces in k8s
+          
